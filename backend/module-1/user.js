@@ -45,8 +45,9 @@ const server = http.createServer((req, res) => {
       //   }
       const bodyObject = Object.fromEntries(params);
       console.log(bodyObject);
+      fs.writeFileSync("user.txt", JSON.stringify(bodyObject));
     });
-    fs.writeFileSync("user.txt", "Prashant Jain");
+
     res.statusCode = 302;
     res.setHeader("Location", "/");
     return res.end();
