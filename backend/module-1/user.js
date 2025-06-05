@@ -28,8 +28,16 @@ const server = http.createServer((req, res) => {
     req.url.toLowerCase() === "/submit-details" &&
     req.method == "POST"
   ) {
+    const body = [];
     req.on("data", (chunk) => {
       console.log(chunk);
+      body.push(chunk);
+      console.log(body);
+    });
+
+    req.on("end", () => {
+      const fullReqBody = Buffer.concat(body).toString();
+      console.log(fullReqBody);
     });
     fs.writeFileSync("user.txt", "Prashant Jain");
     res.statusCode = 302;
