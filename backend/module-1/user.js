@@ -38,6 +38,13 @@ const server = http.createServer((req, res) => {
     req.on("end", () => {
       const fullReqBody = Buffer.concat(body).toString();
       console.log(fullReqBody);
+      const params = new URLSearchParams(fullReqBody);
+      //   const bodyObject = {};
+      //   for (const [key, value] of params.entries()) {
+      //     bodyObject[key] = value;
+      //   }
+      const bodyObject = Object.fromEntries(params);
+      console.log(bodyObject);
     });
     fs.writeFileSync("user.txt", "Prashant Jain");
     res.statusCode = 302;
