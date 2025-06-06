@@ -1,3 +1,5 @@
+const sumOfNumRequest = require("./sum");
+
 const reqHandler = (req, res) => {
   console.log(req.url, req.method);
 
@@ -35,6 +37,11 @@ const reqHandler = (req, res) => {
   </body>
 </html>
         `);
+  } else if (
+    req.url.toLowerCase() === "/calculator-result" &&
+    req.method === "POST"
+  ) {
+    return sumOfNumRequest(req, res);
   }
 };
 
