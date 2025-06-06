@@ -1,7 +1,6 @@
-const http = require("http");
 const fs = require("fs");
 
-const server = http.createServer((req, res) => {
+const userReqHandler = (req, res) => {
   console.log(req.url, req.method);
 
   if (req.url === "/") {
@@ -30,14 +29,14 @@ const server = http.createServer((req, res) => {
   ) {
     const body = [];
     req.on("data", (chunk) => {
-      console.log(chunk);
+      //   console.log(chunk);
       body.push(chunk);
       console.log(body);
     });
 
     req.on("end", () => {
       const fullReqBody = Buffer.concat(body).toString();
-      console.log(fullReqBody);
+      //   console.log(fullReqBody);
       const params = new URLSearchParams(fullReqBody);
       //   const bodyObject = {};
       //   for (const [key, value] of params.entries()) {
@@ -58,9 +57,6 @@ const server = http.createServer((req, res) => {
   res.write("<body><h1>Like / Share / Subscribe</h1></body>");
   res.write("</html>");
   res.end();
-});
+};
 
-const PORT = 3001;
-server.listen(PORT, () => {
-  console.log(`Server running on address http://localhost:${PORT}`);
-});
+module.exports = userReqHandler;
