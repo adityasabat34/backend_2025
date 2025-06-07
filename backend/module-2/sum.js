@@ -1,4 +1,4 @@
-const { URLSearchParams } = require("url");
+// const { URLSearchParams } = require("url");
 
 const sumOfNumRequest = (req, res) => {
   body = [];
@@ -25,9 +25,8 @@ const sumOfNumRequest = (req, res) => {
   </body>
 </html>
         `);
+    return res.end();
   });
-
-  return res.end();
 };
 
 module.exports = sumOfNumRequest;

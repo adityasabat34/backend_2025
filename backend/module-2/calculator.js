@@ -37,12 +37,25 @@ const reqHandler = (req, res) => {
   </body>
 </html>
         `);
+    return res.end();
   } else if (
     req.url.toLowerCase() === "/calculator-result" &&
     req.method === "POST"
   ) {
     return sumOfNumRequest(req, res);
   }
+
+  res.setHeader("Content-Type", "text/html");
+  res.write(`
+    <html>
+      <head><title>Practise Set</title></head>
+      <body>
+        <h1>404 Page Does not Exist</h1>
+        <a href="/">Go To Home</a>
+      </body>  
+    <html>  
+  `);
+  return res.end();
 };
 
 module.exports = reqHandler;
