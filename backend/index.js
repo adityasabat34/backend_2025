@@ -21,4 +21,4 @@ console.log("7. End of script");
 //3
 //5
 //4
-//6
+//6 
