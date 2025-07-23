@@ -1,16 +1,25 @@
 const http = require("http");
-const fs = require("fs");
-const test = require("./test");
+const express = require("express");
 
-PORT = 4001;
+const app = express();
 
-const server = http.createServer((req, res) => {
-  console.log(req.url);
-  res.setHeader("Content-Type", "text/html");
-  res.write("<h1>Hello Server</h1>");
-  test();
+const server = http.createServer(app);
+
+app.use((req, res, next) => {
+  console.log("first middleware", req.url, req.method);
+  next();
 });
 
-server.listen(PORT, (req, res) => {
-  console.log(`server is running on http://localhost:${PORT}`);
+app.use((req, res, next) => {
+  console.log("second middleware", req.url, req.method);
+  next();
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+const PORT = 5000;
+server.listen(PORT, () => {
+  console.log(`Server is running on address http://localhost:${PORT}`);
 });
