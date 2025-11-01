@@ -1,16 +1,11 @@
 const express = require("express");
-
+const userRoutes = require("./routes/userRoutes.js");
 const app = express();
 
-app.use(express.json());
+// app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res, next) => {
-  console.log("Handling / for get request", req.url, req.method);
-  res.send(`Handling / for get request
-    <a href="/register"><button>Register</button></a>`);
-  next();
-});
+app.use(userRoutes);
 
 app.get("/register", (req, res, next) => {
   console.log("Handling /register for get request", req.url, req.method);
