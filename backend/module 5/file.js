@@ -1,15 +1,23 @@
 // const { error } = require("console");
 const fs = require("fs");
+const http = require("http");
 
-console.log("start file reading");
-// sync file creation
-fs.readFile("./test.txt", "utf-8", (err, data) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(data);
+const server = http.createServer((req, res) => {
+  console.log(req.method, req.url);
+
+  switch (req.url) {
+    case "/":
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end("<h1>Home Page</h1>");
+      break;
+
+    case "/about":
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end("<h1>About Page</h1>");
+      break;
   }
 });
-console.log("file reading in progress...");
 
-console.log("end file reading");
+server.listen(3000, () => {
+  console.log("Server is listening on port 3000");
+});
