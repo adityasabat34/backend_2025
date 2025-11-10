@@ -1,23 +1,28 @@
-// const { error } = require("console");
-const fs = require("fs");
-const http = require("http");
+const express = require("express");
 
-const server = http.createServer((req, res) => {
-  console.log(req.method, req.url);
+const app = express();
 
-  switch (req.url) {
-    case "/":
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end("<h1>Home Page</h1>");
-      break;
-
-    case "/about":
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end("<h1>About Page</h1>");
-      break;
-  }
+app.get("/", (req, res) => {
+  res.send("Hello, World! this is home page.");
 });
 
-server.listen(3000, () => {
-  console.log("Server is listening on port 3000");
+app.get("/about", (req, res) => {
+  res.send(
+    "This is the about page." +
+      "Hey " +
+      req.query.name +
+      ", welcome to the about page!" +
+      " Your age is " +
+      req.query.age
+  );
+});
+
+app.post("/data", (req, res) => {
+  res.send("Data received via POST request.");
+});
+
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${"localhost"}:${PORT}`);
 });
